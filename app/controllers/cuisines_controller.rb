@@ -1,10 +1,12 @@
 class CuisinesController < ApplicationController
   def show
     @cuisine = Cuisine.find(params[:id])
+    render :show
   end
 
   def new
     @cuisine = Cuisine.new
+    render :new
   end
 
   def create
@@ -13,7 +15,7 @@ class CuisinesController < ApplicationController
       redirect_to @cuisine
     else
       flash[:error] = 'Você deve informar o nome da cozinha'
-      redirect_to new_cuisine_path
+      render :new
     end
   end
 end
