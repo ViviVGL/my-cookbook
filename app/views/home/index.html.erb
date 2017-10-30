@@ -2,9 +2,11 @@
 <p>Bem-vindo ao maior livro de receitas online</p>
 
 <%= link_to 'Enviar uma receita', new_recipe_path %>
-
 <% @recipes.each do |recipe| %>
   <h1><%= link_to recipe.title, recipe %></h1>
+  <% if recipe.featured? %>
+    <%= image_tag 'star.png' %>
+  <% end %>
   <ul>
     <li><%= recipe.recipe_type.name %></li>
     <li><%= recipe.cuisine.name %></li>

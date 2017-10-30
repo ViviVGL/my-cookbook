@@ -30,6 +30,10 @@
     <%= f.label :method, 'Como Preparar' %>
     <%= f.text_area :method %>
   </div>
+  <div>
+    <%= f.label :featured, 'Destaque' %>
+    <%= f.check_box :featured %>
+  </div>
 
   <%= f.submit 'Enviar' %>
 <% end %>
