@@ -1,12 +1,22 @@
 <h1>CookBook</h1>
 <p>Bem-vindo ao maior livro de receitas online</p>
 
+<% if user_signed_in? %>
+  <%= link_to 'Sair', destroy_user_session_path, method: :delete %>
+  <h2>Minhas Receitas</h2>
+<% else %>
+  <%= link_to 'Logar-se', new_user_session_path %>
+<% end %>
+
 <%= link_to 'Enviar uma receita', new_recipe_path %>
 <% @recipes.each do |recipe| %>
-  <h1><%= link_to recipe.title, recipe %></h1>
-  <% if recipe.featured? %>
-    <%= image_tag 'star.png' %>
-  <% end %>
+  <h1>
+    <% if recipe.featured? %>
+      <%= image_tag 'star.png' %>
+    <% end %>
+    <%= link_to recipe.title, recipe %>
+  </h1>
+
   <ul>
     <%= image_tag recipe.photo.url(:medium) %>
     <li><%= recipe.recipe_type.name %></li>

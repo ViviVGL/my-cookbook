@@ -1,7 +1,9 @@
-<h1><%= @recipe.title %></h1>
-<% if @recipe.featured? %>
-  <%= image_tag 'star.png' %>
-<% end %>
+<h1>
+  <% if @recipe.featured? %>
+    <%= image_tag 'star.png' %>
+  <% end %>
+  <%= @recipe.title %>
+</h1>
 <h3>Detalhes</h3>
 <p>
   <%= image_tag @recipe.photo.url(:medium) %>
