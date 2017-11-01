@@ -3,6 +3,7 @@ require 'rails_helper'
 feature 'User edits recipe' do
   scenario 'successfully' do
     #dados
+    user = User.create(email: 'cat@user.com', password: 'kittycat')
     wrong_cuisine = Cuisine.create(name: 'Thai')
     cuisine = Cuisine.create(name: 'Italiana')
     wrong_recipe_type = RecipeType.create(name: 'Sobremesa')
@@ -10,9 +11,14 @@ feature 'User edits recipe' do
     recipe = Recipe.create(title: 'Nhoque', recipe_type: recipe_type,
                           cuisine: wrong_cuisine, difficulty: 'Fácil',
                           cook_time: 40, ingredients: 'feijão',
-                          method: 'Comprar pronto e colocar no microondas')
+                          method: 'Comprar pronto e colocar no microondas',
+                          user: user)
     #navegacao
     visit root_path
+    click_on 'Entrar'
+    fill_in 'Email', with: 'cat@user.com'
+    fill_in 'Senha', with: 'kittycat'
+    click_on 'Log in'
     click_on recipe.title
     click_on 'Editar'
 
