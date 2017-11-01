@@ -5,10 +5,11 @@
   <%= link_to 'Sair', destroy_user_session_path, method: :delete %>
   <h2>Minhas Receitas</h2>
 <% else %>
-  <%= link_to 'Logar-se', new_user_session_path %>
+  <%= link_to 'Entrar', new_user_session_path %>
 <% end %>
 
 <%= link_to 'Enviar uma receita', new_recipe_path %>
+<h2>Todas as receitas</h2>
 <% @recipes.each do |recipe| %>
   <h1>
     <% if recipe.featured? %>
@@ -26,10 +27,11 @@
   </ul>
 <% end %>
 
+<h4>Cozinhas</h4>
 <% @cuisines.each do |cuisine| %>
   <li><%= link_to cuisine.name, cuisine %></li>
 <% end %>
-
+<h4>Tipos de Receita</h4>
 <% @recipe_types.each do |recipe_type| %>
   <li><%= link_to recipe_type.name, recipe_type %></li>
 <% end %>

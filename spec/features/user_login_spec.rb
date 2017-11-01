@@ -13,10 +13,10 @@ feature 'User login' do
     user = User.create(email: 'meuemail@user.com', password: 'abcd1234')
 
     visit root_path
-    click_on 'Logar-se'
+    click_on 'Entrar'
     fill_in 'Email', with: user.email
     fill_in 'Senha', with: user.password
-    click_on 'Entrar'
+    click_on 'Log in'
 
     expect(page).to have_css('h2', text: 'Minhas Receitas')
     expect(page).not_to have_content 'Logar-se'
