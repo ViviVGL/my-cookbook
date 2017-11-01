@@ -2,10 +2,15 @@ require 'rails_helper'
 
 feature 'User send recipe photo' do
   scenario 'successfully' do
+    User.create(email: 'cat@user.com', password: 'kittycat')
     Cuisine.create(name: 'Italiana')
     RecipeType.create(name: 'Prato Principal')
 
     visit root_path
+    click_on 'Entrar'
+    fill_in 'Email', with: 'cat@user.com'
+    fill_in 'Senha', with: 'kittycat'
+    click_on 'Log in'
     click_on 'Enviar uma receita'
 
     fill_in 'Título', with: 'Nhoque'

@@ -1,14 +1,16 @@
 require 'rails_helper'
 
-feature 'Visitor register recipe' do
+feature 'User register recipe' do
   scenario 'successfully' do
-    #cria os dados necessários, nesse caso não vamos criar dados no banco
+    User.create(email: 'cat@user.com', password: 'kittycat')
     Cuisine.create(name: 'Arabe')
     RecipeType.create(name: 'Entrada')
-    RecipeType.create(name: 'Prato Principal')
-    RecipeType.create(name: 'Sobremesa')
-    # simula a ação do usuário
+
     visit root_path
+    click_on 'Entrar'
+    fill_in 'Email', with: 'cat@user.com'
+    fill_in 'Senha', with: 'kittycat'
+    click_on 'Log in'
     click_on 'Enviar uma receita'
 
     fill_in 'Título', with: 'Tabule'
@@ -32,12 +34,16 @@ feature 'Visitor register recipe' do
     expect(page).to have_css('h3', text: 'Como Preparar')
     expect(page).to have_css('p', text:  'Misturar tudo e servir. Adicione limão a gosto.')
   end
-
-  scenario 'and must fill in all fields' do
-    #cria os dados necessários, nesse caso não vamos criar dados no banco
+  scenario 'and must fill all fields' do
+    User.create(email: 'cat@user.com', password: 'kittycat')
     Cuisine.create(name: 'Arabe')
-    # simula a ação do usuário
+    RecipeType.create(name: 'Entrada')
+
     visit root_path
+    click_on 'Entrar'
+    fill_in 'Email', with: 'cat@user.com'
+    fill_in 'Senha', with: 'kittycat'
+    click_on 'Log in'
     click_on 'Enviar uma receita'
 
     fill_in 'Título', with: ''
@@ -46,7 +52,6 @@ feature 'Visitor register recipe' do
     fill_in 'Ingredientes', with: ''
     fill_in 'Como Preparar', with: ''
     click_on 'Enviar'
-
 
     expect(page).to have_content('Você deve informar todos os dados da receita')
   end
