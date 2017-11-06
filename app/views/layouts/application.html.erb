@@ -9,6 +9,9 @@
   </head>
 
   <body>
+    <% if flash[:notice] %>
+      <div class="success"><%= flash[:notice] %></div>
+    <% end %>
     <div>
       <%= flash[:message] %>
     </div>

@@ -22,6 +22,7 @@
 <p><%= @recipe.method %></p>
 
 <% if user_signed_in? && current_user == @recipe.user %>
+  <%= link_to 'Enviar para um amigo' %>
   <%= link_to 'Editar', edit_recipe_path %>
 <% end %>
   <%= link_to 'Voltar', root_path %>

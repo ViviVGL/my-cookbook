@@ -1,8 +1,9 @@
 class RecipesController < ApplicationController
-  before_action :recipe_find, only: [:show, :edit, :update]
+  before_action :set_recipe, only: [:show, :edit, :update]
   before_action :authenticate_user!, only: [:new, :edit]
 
   def show
+    UserMailer.email_friend
   end
 
   def new
@@ -16,6 +17,7 @@ class RecipesController < ApplicationController
     @recipe.user = current_user
 
     if @recipe.save
+      flash[:notice] = 'Receita gravada com sucesso.'
       redirect_to @recipe
     else
       @cuisines = Cuisine.all
@@ -38,10 +40,9 @@ class RecipesController < ApplicationController
     redirect_to @recipe
   end
 
-
   private
 
-  def recipe_find
+  def set_recipe
     @recipe = Recipe.find(params[:id])
   end
 
@@ -51,5 +52,4 @@ class RecipesController < ApplicationController
                                     :ingredients, :method, :featured, :photo,
                                     :user_id)
   end
-
 end

@@ -22,7 +22,7 @@ feature 'User register recipe' do
     fill_in 'Como Preparar', with: 'Misturar tudo e servir. Adicione limão a gosto.'
     click_on 'Enviar'
 
-
+    expect(page).to have_content 'Receita gravada com sucesso.'
     expect(page).to have_css('h1', text: 'Tabule')
     expect(page).to have_css('h3', text: 'Detalhes')
     expect(page).to have_css('p', text: 'Entrada')
