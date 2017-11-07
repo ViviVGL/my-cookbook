@@ -22,7 +22,15 @@
 <p><%= @recipe.method %></p>
 
 <% if user_signed_in? && current_user == @recipe.user %>
-  <%= link_to 'Enviar para um amigo' %>
   <%= link_to 'Editar', edit_recipe_path %>
+<% end %>
+<% if user_signed_in? %>
+  <%= form_tag email_to_friend_recipe_path  do %>
+    <%= label_tag :friend_email, 'Email' %>
+    <%= text_field_tag :friend_email %>
+    <%= label_tag :text, 'Texto' %>
+    <%= text_area_tag :text %>
+    <%= submit_tag 'Enviar para um amigo' %>
+  <% end %>
 <% end %>
   <%= link_to 'Voltar', root_path %>

@@ -18,6 +18,9 @@ feature 'User send email to a friend' do
     click_on 'Log in'
     click_on recipe.title
 
+    fill_in 'Email', with: 'friend@email.com'
+    fill_in 'Texto', with: 'Se liga nessa receita, você vai adorar!'
+
     expect(UserMailer).to receive(:email_friend)
 
     click_on 'Enviar para um amigo'

@@ -3,7 +3,6 @@ class RecipesController < ApplicationController
   before_action :authenticate_user!, only: [:new, :edit]
 
   def show
-    UserMailer.email_friend
   end
 
   def new
@@ -38,6 +37,10 @@ class RecipesController < ApplicationController
   def update
     @recipe.update(recipe_params)
     redirect_to @recipe
+  end
+
+  def email_to_friend
+    UserMailer.email_friend
   end
 
   private
