@@ -1,5 +1,5 @@
 class RecipesController < ApplicationController
-  before_action :set_recipe, only: [:show, :edit, :update]
+  before_action :set_recipe, only: [:show, :edit, :update, :email_to_friend]
   before_action :authenticate_user!, only: [:new, :edit]
 
   def show
@@ -40,7 +40,9 @@ class RecipesController < ApplicationController
   end
 
   def email_to_friend
-    UserMailer.email_friend
+    @friend_email = params[:friend_email]
+    @message_to_friend = params[:message_to_friend]
+    UserMailer.email_to_friend(@recipe.id, @friend_email, @message_to_friend)
   end
 
   private

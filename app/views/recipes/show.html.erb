@@ -28,8 +28,8 @@
   <%= form_tag email_to_friend_recipe_path  do %>
     <%= label_tag :friend_email, 'Email' %>
     <%= text_field_tag :friend_email %>
-    <%= label_tag :subject, 'Assunto' %>
-    <%= text_field_tag :subject %>
+    <%= label_tag :message_to_friend, 'Mensagem' %>
+    <%= text_field_tag :message_to_friend %>
     <%= submit_tag 'Enviar para um amigo' %>
   <% end %>
 <% end %>
