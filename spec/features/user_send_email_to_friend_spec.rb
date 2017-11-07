@@ -19,7 +19,7 @@ feature 'User send email to a friend' do
     click_on recipe.title
 
     fill_in 'Email', with: 'friend@email.com'
-    fill_in 'Texto', with: 'Se liga nessa receita, você vai adorar!'
+    fill_in 'Assunto', with: 'Se liga nessa receita, você vai adorar!'
 
     expect(UserMailer).to receive(:email_friend)
 
