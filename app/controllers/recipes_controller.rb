@@ -1,5 +1,6 @@
 class RecipesController < ApplicationController
-  before_action :set_recipe, only: [:show, :edit, :update, :email_to_friend]
+  before_action :set_recipe, only: [:show, :edit, :update, :email_to_friend,
+                                    :favorite]
   before_action :authenticate_user!, only: [:new, :edit]
 
   def show
