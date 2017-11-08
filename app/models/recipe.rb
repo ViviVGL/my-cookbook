@@ -4,6 +4,8 @@ class Recipe < ApplicationRecord
   belongs_to :cuisine
   belongs_to :recipe_type
   belongs_to :user
+  has_many :favorites
+  has_many :users, through: :favorites
 
   has_attached_file :photo, styles: { medium: "300x300>", thumb: "100x100>" },
                   default_url: "/images/:style/sem-foto.png"

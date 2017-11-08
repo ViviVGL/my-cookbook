@@ -1,0 +1,4 @@
+<h3>Minhas Receitas Favoritas</h3>
+<% @favorites.each do |favorite| %>
+  <%= favorite.user.recipe.title %>
+<% end %>

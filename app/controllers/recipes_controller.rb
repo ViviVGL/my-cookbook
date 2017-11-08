@@ -45,6 +45,10 @@ class RecipesController < ApplicationController
     UserMailer.email_to_friend(@recipe.id, @friend_email, @message_to_friend)
   end
 
+  def favorite
+    redirect_to user_favorites_path
+  end
+
   private
 
   def set_recipe
