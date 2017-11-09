@@ -8,6 +8,6 @@ class Recipe < ApplicationRecord
   has_many :users, through: :favorites
 
   has_attached_file :photo, styles: { medium: "300x300>", thumb: "100x100>" },
-                  default_url: "/images/:style/sem-foto.png"
+                            default_url: '/images/:style/sem-foto.png'
   validates_attachment_content_type :photo, content_type: /\Aimage\/.*\z/
 end

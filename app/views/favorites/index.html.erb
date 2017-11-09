@@ -1,1 +1,11 @@
 <h3>Minhas Receitas Favoritas</h3>
+<% @favorites.each do |favorite| %>
+  <%= link_to favorite.title, favorite %>
+  <%= image_tag favorite.photo.url(:medium) %>
+  <ul>
+    <li><%= favorite.recipe_type.name %></li>
+    <li><%= favorite.cuisine.name %></li>
+    <li><%= favorite.difficulty %></li>
+    <li><%= favorite.cook_time %></li>
+  </ul>
+<% end %>

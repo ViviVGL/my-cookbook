@@ -1,10 +1,9 @@
 class RecipesController < ApplicationController
-  before_action :set_recipe, only: [:show, :edit, :update, :email_to_friend,
-                                    :favorite]
-  before_action :authenticate_user!, only: [:new, :edit]
+  before_action :set_recipe, only: %i[show edit update email_to_friend
+                                      favorite]
+  before_action :authenticate_user!, only: %i[new edit]
 
-  def show
-  end
+  def show; end
 
   def new
     @recipe = Recipe.new
@@ -15,22 +14,17 @@ class RecipesController < ApplicationController
   def create
     @recipe = Recipe.new(recipe_params)
     @recipe.user = current_user
-
     if @recipe.save
       flash[:notice] = 'Receita gravada com sucesso.'
       redirect_to @recipe
     else
-      @cuisines = Cuisine.all
-      @recipe_types = RecipeType.all
-      flash[:error] = 'Você deve informar todos os dados da receita'
+      set_error_before_render
       render :new
     end
   end
 
   def edit
-    if @recipe.user != current_user
-      redirect_to root_url
-    end
+    redirect_to root_url if @recipe.user != current_user
     @recipe_types = RecipeType.all
     @cuisines = Cuisine.all
   end
@@ -47,6 +41,7 @@ class RecipesController < ApplicationController
   end
 
   def favorite
+    Favorite.create(recipe: @recipe, user: current_user)
     redirect_to user_favorites_path
   end
 
@@ -56,10 +51,15 @@ class RecipesController < ApplicationController
     @recipe = Recipe.find(params[:id])
   end
 
+  def set_error_before_render
+    @cuisines = Cuisine.all
+    @recipe_types = RecipeType.all
+    flash[:error] = 'Você deve informar todos os dados da receita'
+  end
+
   def recipe_params
-    recipe_params = params.require(:recipe).permit(:title, :recipe_type_id,
-                                    :cuisine_id, :difficulty, :cook_time,
-                                    :ingredients, :method, :featured, :photo,
-                                    :user_id)
+    params.require(:recipe).permit(:title, :recipe_type_id, :cuisine_id,
+                                   :difficulty, :cook_time, :ingredients,
+                                   :method, :featured, :photo, :user_id)
   end
 end

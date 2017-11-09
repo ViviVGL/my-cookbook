@@ -4,12 +4,10 @@ feature 'User login' do
   scenario 'successfully' do
     cuisine = Cuisine.create(name: 'Brasileira')
     recipe_type = RecipeType.create(name: 'Sobremesa')
-    recipe = Recipe.create(title: 'Bolo de cenoura', recipe_type: recipe_type,
-                          cuisine: cuisine, difficulty: 'Médio',
-                          cook_time: 60,
-                          ingredients: 'Farinha, açucar, cenoura',
-                          method: 'Misture tudo e leve ao forno',
-                          featured: true)
+    Recipe.create(title: 'Bolo de cenoura', recipe_type: recipe_type,
+                  cuisine: cuisine, difficulty: 'Médio', cook_time: 60,
+                  ingredients: 'Farinha, açucar, cenoura',
+                  method: 'Misture tudo e leve ao forno', featured: true)
     user = User.create(email: 'meuemail@user.com', password: 'abcd1234')
 
     visit root_path

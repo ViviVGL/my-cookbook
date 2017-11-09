@@ -6,10 +6,10 @@ feature 'User set favorite recipe' do
     cuisine = Cuisine.create(name: 'Italiana')
     recipe_type = RecipeType.create(name: 'Prato Principal')
     recipe = Recipe.create(title: 'Nhoque', recipe_type: recipe_type,
-                          cuisine: cuisine, difficulty: 'Fácil',
-                          cook_time: 40, ingredients: 'massa, molho, tempero',
-                          method: 'Comprar pronto e colocar no microondas',
-                          user: user)
+                           cuisine: cuisine, difficulty: 'Fácil',
+                           cook_time: 40, ingredients: 'massa, molho, tempero',
+                           method: 'Comprar pronto e colocar no microondas',
+                           user: user)
 
     visit root_path
     click_on 'Entrar'
@@ -26,5 +26,20 @@ feature 'User set favorite recipe' do
     expect(page).to have_css('li', text: recipe.cuisine.name)
     expect(page).to have_css('li', text: recipe.difficulty)
     expect(page).to have_css('li', text: recipe.cook_time)
+  end
+  scenario 'but forgets to login' do
+    user = User.create(email: 'cat@user.com', password: 'kittycat')
+    cuisine = Cuisine.create(name: 'Italiana')
+    recipe_type = RecipeType.create(name: 'Prato Principal')
+    recipe = Recipe.create(title: 'Nhoque', recipe_type: recipe_type,
+                           cuisine: cuisine, difficulty: 'Fácil',
+                           cook_time: 40, ingredients: 'massa, molho, tempero',
+                           method: 'Comprar pronto e colocar no microondas',
+                           user: user)
+
+    visit root_path
+    click_on recipe.title
+
+    expect(page).not_to have_link 'Marcar como Favorita'
   end
 end

@@ -32,6 +32,6 @@
     <%= text_field_tag :message_to_friend %>
     <%= submit_tag 'Enviar para um amigo' %>
   <% end %>
-  <%= link_to 'Marcar como Favorita', favorite_recipe_path %>
+  <%= link_to 'Marcar como Favorita', favorite_recipe_path, method: :post %>
 <% end %>
   <%= link_to 'Voltar', root_path %>

@@ -18,8 +18,8 @@ feature 'User register recipe' do
     select 'Entrada', from: 'Tipo da Receita'
     fill_in 'Dificuldade', with: 'Fácil'
     fill_in 'Tempo de Preparo', with: '45'
-    fill_in 'Ingredientes', with: 'Trigo para quibe, cebola, tomate picado, azeite, salsinha'
-    fill_in 'Como Preparar', with: 'Misturar tudo e servir. Adicione limão a gosto.'
+    fill_in 'Ingredientes', with: 'Trigo, cebola, tomate picado, azeite, limão'
+    fill_in 'Como Preparar', with: 'Misturar tudo e servir. Adicione limão.'
     click_on 'Enviar'
 
     expect(page).to have_content 'Receita gravada com sucesso.'
@@ -28,11 +28,11 @@ feature 'User register recipe' do
     expect(page).to have_css('p', text: 'Entrada')
     expect(page).to have_css('p', text: 'Arabe')
     expect(page).to have_css('p', text: 'Fácil')
-    expect(page).to have_css('p', text: "45 minutos")
+    expect(page).to have_css('p', text: '45 minutos')
     expect(page).to have_css('h3', text: 'Ingredientes')
-    expect(page).to have_css('p', text: 'Trigo para quibe, cebola, tomate picado, azeite, salsinha')
+    expect(page).to have_css('p', text: 'Trigo, cebola, tomate picado, azeite, limão')
     expect(page).to have_css('h3', text: 'Como Preparar')
-    expect(page).to have_css('p', text:  'Misturar tudo e servir. Adicione limão a gosto.')
+    expect(page).to have_css('p', text:  'Misturar tudo e servir. Adicione limão.')
   end
   scenario 'and must fill all fields' do
     User.create(email: 'cat@user.com', password: 'kittycat')

@@ -5,11 +5,12 @@ feature 'User marks featured recipe' do
     user = User.create(email: 'cat@user.com', password: 'kittycat')
     cuisine = Cuisine.create(name: 'Arabe')
     recipe_type = RecipeType.create(name: 'Entrada')
-    recipe = Recipe.create(title: 'Tabule', cuisine: cuisine, recipe_type: recipe_type,
-                  difficulty: 'Fácil', cook_time: 45,
-                  ingredients: 'Trigo para quibe, cebola, tomate picado, azeite, salsinha',
-                  method: 'Misturar tudo e servir. Adicione limão a gosto.',
-                  featured: true, user: user)
+    recipe = Recipe.create(title: 'Tabule', cuisine: cuisine,
+                           recipe_type: recipe_type, difficulty: 'Fácil',
+                           cook_time: 45,
+                           ingredients: 'Trigo, cebola, tomate, azeite, limão',
+                           method: 'Misturar tudo e servir. Adicione limão.',
+                           featured: true, user: user)
 
     visit root_path
 

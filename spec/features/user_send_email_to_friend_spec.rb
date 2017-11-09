@@ -8,10 +8,10 @@ feature 'User send email to a friend' do
     friend_email = 'friend@email.com'
     message_to_friend = 'Se liga nessa receita, você vai adorar!'
     recipe = Recipe.create(title: 'Nhoque', recipe_type: recipe_type,
-                          cuisine: cuisine, difficulty: 'Fácil',
-                          cook_time: 40, ingredients: 'massa, molho, tempero',
-                          method: 'Comprar pronto e colocar no microondas',
-                          user: user)
+                           cuisine: cuisine, difficulty: 'Fácil',
+                           cook_time: 40, ingredients: 'massa, molho, tempero',
+                           method: 'Comprar pronto e colocar no microondas',
+                           user: user)
 
     visit root_path
     click_on 'Entrar'
@@ -24,7 +24,7 @@ feature 'User send email to a friend' do
     fill_in 'Mensagem', with: message_to_friend
 
     expect(UserMailer).to receive(:email_to_friend).with(1, friend_email,
-                                                      message_to_friend)
+                                                         message_to_friend)
 
     click_on 'Enviar para um amigo'
   end
