@@ -42,4 +42,39 @@ feature 'User set favorite recipe' do
 
     expect(page).not_to have_link 'Marcar como Favorita'
   end
+  scenario 'and mark more than one' do
+    user = User.create(email: 'cat@user.com', password: 'kittycat')
+    first_cuisine = Cuisine.create(name: 'Italiana')
+    first_recipe_type = RecipeType.create(name: 'Prato Principal')
+    first_recipe = Recipe.create(title: 'Nhoque',
+                                 recipe_type: first_recipe_type,
+                                 cuisine: first_cuisine, difficulty: 'Fácil',
+                                 cook_time: 40,
+                                 ingredients: 'massa, molho, tempero',
+                                 method: 'Colocar no microondas', user: user)
+    second_cuisine = Cuisine.create(name: 'Brasileira')
+    second_recipe_type = RecipeType.create(name: 'Sobremesa')
+    second_recipe = Recipe.create(title: 'Bolo de cenoura',
+                                  recipe_type: second_recipe_type,
+                                  cuisine: second_cuisine, difficulty: 'Médio',
+                                  cook_time: 60,
+                                  ingredients: 'Farinha, açucar, cenoura',
+                                  method: 'Cozinhe a cenoura, misture tudo',
+                                  user: user)
+
+    visit root_path
+    click_on 'Entrar'
+    fill_in 'Email', with: 'cat@user.com'
+    fill_in 'Senha', with: 'kittycat'
+    click_on 'Log in'
+    click_on first_recipe.title
+    click_on 'Marcar como Favorita'
+
+    visit root_path
+    click_on second_recipe.title
+    click_on 'Marcar como Favorita'
+
+    expect(page).to have_content first_recipe.title
+    expect(page).to have_content second_recipe.title
+  end
 end
