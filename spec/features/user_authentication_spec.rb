@@ -12,10 +12,7 @@ feature 'User authentication' do
                            user: user)
 
     visit root_path
-    click_on 'Entrar'
-    fill_in 'Email', with: 'cat@user.com'
-    fill_in 'Senha', with: 'kittycat'
-    click_on 'Log in'
+    login_as(user)
     click_on recipe.title
 
     expect(page).to have_link 'Editar'
@@ -40,10 +37,7 @@ feature 'User authentication' do
                                   user: second_user)
 
     visit root_path
-    click_on 'Entrar'
-    fill_in 'Email', with: 'cat@user.com'
-    fill_in 'Senha', with: 'kittycat'
-    click_on 'Log in'
+    login_as(first_user)
     click_on second_recipe.title
 
     expect(page).not_to have_link 'Editar'

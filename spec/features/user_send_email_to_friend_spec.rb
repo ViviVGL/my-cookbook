@@ -14,10 +14,7 @@ feature 'User send email to a friend' do
                            user: user)
 
     visit root_path
-    click_on 'Entrar'
-    fill_in 'Email', with: 'cat@user.com'
-    fill_in 'Senha', with: 'kittycat'
-    click_on 'Log in'
+    login_as(user)
     click_on recipe.title
 
     fill_in 'Email', with: friend_email

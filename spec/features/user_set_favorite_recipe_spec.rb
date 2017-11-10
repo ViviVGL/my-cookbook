@@ -12,10 +12,7 @@ feature 'User set favorite recipe' do
                            user: user)
 
     visit root_path
-    click_on 'Entrar'
-    fill_in 'Email', with: 'cat@user.com'
-    fill_in 'Senha', with: 'kittycat'
-    click_on 'Log in'
+    login_as(user)
     click_on recipe.title
     click_on 'Marcar como Favorita'
 
@@ -63,18 +60,35 @@ feature 'User set favorite recipe' do
                                   user: user)
 
     visit root_path
-    click_on 'Entrar'
-    fill_in 'Email', with: 'cat@user.com'
-    fill_in 'Senha', with: 'kittycat'
-    click_on 'Log in'
+    login_as(user)
     click_on first_recipe.title
     click_on 'Marcar como Favorita'
+    click_on 'Voltar para a Tela Inicial'
 
-    visit root_path
+    expect(current_path).to eq(root_path)
+
     click_on second_recipe.title
     click_on 'Marcar como Favorita'
 
     expect(page).to have_content first_recipe.title
     expect(page).to have_content second_recipe.title
+  end
+  scenario 'but cant mark the same again' do
+    user = User.create(email: 'cat@user.com', password: 'kittycat')
+    cuisine = Cuisine.create(name: 'Italiana')
+    recipe_type = RecipeType.create(name: 'Prato Principal')
+    recipe = Recipe.create(title: 'Nhoque', recipe_type: recipe_type,
+                           cuisine: cuisine, difficulty: 'Fácil',
+                           cook_time: 40, ingredients: 'massa, molho, tempero',
+                           method: 'Comprar pronto e colocar no microondas',
+                           user: user)
+    favorite = Favorite.create(user: user, recipe: recipe)
+
+    visit root_path
+    login_as(user)
+
+    click_on recipe.title
+
+    expect(page).not_to have_link 'Marcar como Favorita'
   end
 end

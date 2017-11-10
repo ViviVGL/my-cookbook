@@ -24,14 +24,27 @@
 <% if user_signed_in? && current_user == @recipe.user %>
   <%= link_to 'Editar', edit_recipe_path %>
 <% end %>
+
+<% if user_signed_in? %>
+  <div>
+    <%= link_to 'Marcar como Favorita', favorite_recipe_path, method: :post %>
+  </div>
+  <br>
+<% end %>
 <% if user_signed_in? %>
   <%= form_tag email_to_friend_recipe_path  do %>
-    <%= label_tag :friend_email, 'Email' %>
-    <%= text_field_tag :friend_email %>
-    <%= label_tag :message_to_friend, 'Mensagem' %>
-    <%= text_field_tag :message_to_friend %>
+    <div>
+      <%= label_tag :friend_email, 'Email' %>
+      <%= text_field_tag :friend_email %>
+    </div>
+    <div>
+      <%= label_tag :message_to_friend, 'Mensagem' %>
+      <%= text_field_tag :message_to_friend %>
+    </div>
     <%= submit_tag 'Enviar para um amigo' %>
   <% end %>
-  <%= link_to 'Marcar como Favorita', favorite_recipe_path, method: :post %>
 <% end %>
+<br>
+<div>
   <%= link_to 'Voltar', root_path %>
+</div>
