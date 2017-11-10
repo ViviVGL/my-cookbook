@@ -3,7 +3,9 @@ class RecipesController < ApplicationController
                                       favorite]
   before_action :authenticate_user!, only: %i[new edit]
 
-  def show; end
+  def show
+    @favorite = Favorite.where(recipe: @recipe, user: current_user).any?
+  end
 
   def new
     @recipe = Recipe.new
