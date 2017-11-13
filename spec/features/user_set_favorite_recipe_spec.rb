@@ -91,4 +91,18 @@ feature 'User set favorite recipe' do
 
     expect(page).not_to have_link 'Marcar como Favorita'
   end
+  scenario 'and dont view favorite if logged out' do
+    user = User.create(email: 'cat@user.com', password: 'kittycat')
+    cuisine = Cuisine.create(name: 'Italiana')
+    recipe_type = RecipeType.create(name: 'Prato Principal')
+    recipe = Recipe.create(title: 'Nhoque', recipe_type: recipe_type,
+                           cuisine: cuisine, difficulty: 'Fácil',
+                           cook_time: 40, ingredients: 'massa, molho, tempero',
+                           method: 'Comprar pronto e colocar no microondas',
+                           user: user)
+
+    visit user_favorites_path
+
+    expect(current_path).to eq(new_user_session_path)
+  end
 end
