@@ -1,5 +1,6 @@
-<h1>CookBook</h1>
-<p>Bem-vindo ao maior livro de receitas online</p>
+<% if user_signed_in? %>
+<h2>Minhas Receitas</h2>
+<% end %>
 
 <h2>Receitas</h2>
 <% @recipes.each do |recipe| %>

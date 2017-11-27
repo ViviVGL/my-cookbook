@@ -26,6 +26,10 @@ gem 'jbuilder', '~> 2.5'
 
 gem 'devise'
 
+gem 'bootstrap-sass', '~> 3.3.7'
+
+gem 'jquery-rails'
+
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'capybara'
